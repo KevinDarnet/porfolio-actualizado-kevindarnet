@@ -1,0 +1,300 @@
+{
+  "nav": {
+    "brand": "k.darnet",
+    "brandFull": "Kevin Darnet",
+    "about": "Sobre mí",
+    "production": "Servicios en Producción",
+    "projects": "Proyectos",
+    "blog": "Artículos",
+    "skills": "Habilidades",
+    "experience": "Trayectoria",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "breadcrumb": "... /About me ...",
+    "rolePrefix": "Full-Stack Developer",
+    "roleHighlight": "& AppSec Enthusiast",
+    "badge": "Cybersecurity Student | AppSec Fundamentals",
+    "status": "Sistemas Activos & Desarrollo Seguro",
+    "tagline": "Construyo aplicaciones web seguras y escalables, integrando prácticas de AppSec, análisis de riesgos y automatización de seguridad desde las primeras etapas del ciclo de vida (Shift-Left).",
+    "ctaPrimary": "Proyectos",
+    "ctaSecondary": "Contáctame",
+    "profileHeader": "// PERFIL TÉCNICO",
+    "profileBadge": "Full-Stack & AppSec",
+    "profileSummary": "Desarrollo de punta a punta integrando buenas prácticas de seguridad desde el código: validación rigurosa, arquitectura escalable y despliegue continuo.",
+    "profilePoints": [
+      {
+        "label": "Stack principal",
+        "value": "React, Node.js, Express, MongoDB."
+      },
+      {
+        "label": "Prácticas AppSec",
+        "value": "Criterios OWASP, sanitización y autenticación robusta."
+      },
+      {
+        "label": "Enfoque",
+        "value": "Software listo para producción y código mantenible."
+      }
+    ],
+    "socials": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "email": "Email"
+    }
+  },
+  "production": {
+    "breadcrumb": "... /Production Systems ...",
+    "title": "Servicios en Producción",
+    "subtitle": "Plataformas reales operativas en entornos productivos con alta disponibilidad, arquitecturas desacopladas y controles de seguridad activos.",
+    "statusBadge": "Active in Production",
+    "techLabel": "Stack Tecnológico",
+    "metricLabel": "SLA & Seguridad",
+    "items": [
+      {
+        "id": "prod-1",
+        "name": "DocenBox — Suite de Gestión Docente Integral",
+        "category": "EdTech SaaS / Productivity",
+        "description": "Plataforma web integral diseñada para erradicar la sobrecarga administrativa en docentes de nivel primario, secundario y técnico. Centraliza la toma de asistencias en tiempo real, libretas de calificaciones con cálculo automático de promedios e intensificaciones, confección de planificaciones curriculares oficiales y gestión de horarios multiescuela con prevención de colisiones.",
+        "problemSolved": "Aislamiento multi-tenant por UID con Cloud Firestore y persistencia offline. Resguardo contra pérdida accidental de datos mediante Papelera con Soft Delete y pasarela de suscripciones automatizada.",
+        "stack": ["React 18", "TypeScript", "Firebase Auth", "Cloud Firestore", "Tailwind CSS", "Vercel Serverless"],
+        "metric": "+99.9% Uptime | Offline Ready",
+        "ctaPrimary": "Ir a la Plataforma",
+        "ctaSecondary": "Código en GitHub",
+        "liveUrl": "https://docenbox.web.app",
+        "demoUrl": "https://github.com/KevinDarnet/docenbox"
+      },
+      {
+        "id": "prod-2",
+        "name": "Config & URL Security Inspector — Auditor Local .env & Endpoints",
+        "category": "AppSec Tool / DevSecOps",
+        "description": "Auditor estático client-side de archivos .env y analizador estático de URLs/endpoints de arquitectura Zero-Trust (CSP connect-src 'none'). Detecta firmas de secretos críticos (JWT, Stripe, Cloud keys, DSNs de bases de datos), calcula entropía de Shannon, genera plantillas .env.example sanitizadas y audita parámetros sensibles o puertos riesgosos sin enviar un solo byte a la red.",
+        "problemSolved": "Procesamiento determinista 100% en memoria volátil sin persistencia en localStorage. Digest criptográfico local SHA-256 y CSPRNG de 256 bits mediante Web Crypto API con tests unitarios en Node.js.",
+        "stack": ["Vanilla JS (ES6+)", "Web Crypto API", "Tailwind CSS", "RegEx Engine", "CSP Level 3", "Node.js Test Runner"],
+        "metric": "Zero-Trust | CSP connect-src 'none'",
+        "ctaPrimary": "Probar Inspector",
+        "ctaSecondary": "Código en GitHub",
+        "liveUrl": "https://config-and-url-sec-inspector.web.app/",
+        "demoUrl": "https://github.com/KevinDarnet/config-url-security-inspector"
+      }
+    ]
+  },
+  "projects": {
+    "breadcrumb": "... /Projects & Open Source ...",
+    "title": "Proyectos Destacados",
+    "subtitle": "Implementaciones técnicas, arquitecturas modulares y repositorios open-source enfocados en calidad de código y buenas prácticas.",
+    "demoBtn": "Demo en Vivo",
+    "codeBtn": "Código en GitHub",
+    "items": [
+      {
+        "id": "proj-1",
+        "number": "01",
+        "title": "MyTinerary — Red de Viajes e Itinerarios",
+        "description": "Aplicación web Full-Stack estilo red de viajes y turismo para explorar ciudades globales e itinerarios personalizados creados por usuarios.",
+        "highlight": "Arquitectura MERN + Redux",
+        "tags": ["React", "Redux Toolkit", "Node.js", "Express", "MongoDB", "JWT", "Tailwind CSS"],
+        "features": [
+          "Arquitectura MERN completa con API RESTful y persistencia en base de datos NoSQL.",
+          "Manejo global del estado con Redux Toolkit para filtros de búsqueda y catálogo de ciudades.",
+          "Módulo de autenticación segura de usuarios (JWT) y gestión de itinerarios con detalles de presupuesto, duración y hashtags."
+        ],
+        "demoUrl": "https://mytinerary-ac285.web.app/",
+        "repoUrl": "https://github.com/KevinDarnet/MyTinerary"
+      },
+      {
+        "id": "proj-2",
+        "number": "02",
+        "title": "Amazing Events — Exploración y Gestión de Eventos",
+        "description": "Plataforma web interactiva para la gestión y exploración de eventos culturales, recitales y conferencias. Cuenta con filtrado multidimensional en tiempo real (categorías, búsqueda por texto libre y estadísticas de concurrencia y asistencia).",
+        "highlight": "Filtrado Reactivo en Cliente",
+        "tags": ["JavaScript (ES6+)", "HTML5 Semántico", "Bootstrap", "Tailwind CSS", "REST API"],
+        "features": [
+          "Filtrado reactivo en cliente combinando checkboxes dinámicos y campo de búsqueda.",
+          "Módulo de estadísticas con cálculos de capacidad, porcentaje de asistencia e ingresos estimados.",
+          "Arquitectura modular desacoplada para renderizado de vistas según eventos pasados o futuros."
+        ],
+        "demoUrl": "https://amazingevents-eta.vercel.app/",
+        "repoUrl": "https://github.com/KevinDarnet/AmazingEvents"
+      },
+      {
+        "id": "proj-3",
+        "number": "03",
+        "title": "AppSec Auth & API Gateway Boilerplate",
+        "description": "Plantilla base de servidor Node/Express endurecida para producción: rate-limiting, sanitización contra NoSQL Injection, cabeceras seguras, hashing con bcrypt y políticas CORS estrictas.",
+        "highlight": "Hardened Security Baseline",
+        "tags": ["Node.js", "Express", "JWT Auth", "MongoDB", "OWASP"],
+        "features": [
+          "Defensa en profundidad con validación estricta de esquemas y mitigación OWASP.",
+          "Gestión segura de credenciales con hashing bcrypt y tokens JWT rotativos."
+        ],
+        "demoUrl": "",
+        "repoUrl": "https://github.com/KevinDarnet"
+      },
+      {
+        "id": "proj-4",
+        "number": "04",
+        "title": "Logitech Showcase & E-Commerce Landing",
+        "description": "Landing page moderna y minimalista inspirada en la línea de periféricos de Logitech. Presentación interactiva de productos con carrusel dinámico, catálogo de especificaciones y diseño adaptativo optimizado para dispositivos móviles y de escritorio.",
+        "highlight": "Frontend Showcase",
+        "tags": ["HTML5", "CSS3 / Flexbox", "JavaScript", "Responsive UI", "Vercel"],
+        "features": [
+          "Navegación responsiva con menú móvil y jerarquía visual optimizada para conversión en e-commerce.",
+          "Arquitectura ligera con componentes modulares y despliegue continuo en la infraestructura de Vercel."
+        ],
+        "demoUrl": "https://logitech-frontend-kevindarnet.vercel.app/index.html",
+        "repoUrl": "https://github.com/KevinDarnet/logitech-frontend"
+      }
+    ]
+  },
+  "blog": {
+    "breadcrumb": "... /Technical Blog & Research ...",
+    "title": "Artículos & Publicaciones Técnicas",
+    "subtitle": "Reflexiones de ingeniería de software, análisis de seguridad en aplicaciones y patrones arquitectónicos probados en producción.",
+    "searchPlaceholder": "Buscar por título, contenido o tecnología...",
+    "allFilter": "Todos",
+    "allTechnologies": "Todas las tecnologías",
+    "readArticle": "Leer artículo completo",
+    "backToList": "Volver a artículos",
+    "readTime": "de lectura",
+    "author": "Por Kevin Darnet",
+    "resultsCount": "artículos encontrados",
+    "noResults": "No se encontraron artículos para tu búsqueda.",
+    "clearSearch": "Limpiar filtros",
+    "shareArticle": "Compartir",
+    "copiedLink": "Enlace copiado",
+    "authorBio": "Desarrollador Full-Stack MERN y estudiante de Ciberseguridad enfocado en arquitecturas seguras y código listo para producción."
+  },
+  "scrollAffordance": {
+    "label": "// SCROLL PARA CONTINUAR"
+  },
+  "skills": {
+    "breadcrumb": "... /Tech Stack & AppSec ...",
+    "title": "Stack Técnico & AppSec Fundamentals",
+    "subtitle": "Dominio integral del ciclo de desarrollo Full-Stack complementado con fundamentos sólidos de seguridad ofensiva/defensiva aplicada al código.",
+    "categories": [
+      {
+        "id": "frontend",
+        "code": "01 // CLIENT-SIDE",
+        "title": "Frontend Architecture",
+        "description": "Interfaces modernas, accesibles y altamente responsivas con estado predecible y diseño modular.",
+        "skills": [
+          "React.js (Hooks, Context, Custom Hooks)",
+          "JavaScript (ES6+) moderno y asincronía",
+          "HTML5 Semántico & Accesibilidad (WCAG)",
+          "CSS3 & Tailwind CSS (Dark UI Systems)",
+          "Responsive Design (Mobile-First a Ultrawide)"
+        ],
+        "tags": ["React", "ES6+", "HTML5", "CSS3", "Tailwind CSS", "Responsive Design"]
+      },
+      {
+        "id": "backend",
+        "code": "02 // SERVER-SIDE",
+        "title": "Backend Engineering",
+        "description": "Servicios escalables, desacoplados y estructurados para facilitar el mantenimiento y la evolución.",
+        "skills": [
+          "Node.js & Entorno de ejecución asíncrono",
+          "Express.js (Middlewares, Routing modular)",
+          "Arquitectura MVC y separación de capas",
+          "Diseño, creación y consumo de RESTful APIs",
+          "Manejo centralizado de errores y logs"
+        ],
+        "tags": ["Node.js", "Express.js", "MVC Architecture", "RESTful APIs"]
+      },
+      {
+        "id": "database",
+        "code": "03 // DATA LAYER",
+        "title": "Base de Datos & Modelado",
+        "description": "Persistencia documental optimizada para consultas rápidas, integridad referencial e índices eficientes.",
+        "skills": [
+          "MongoDB (Diseño documental NoSQL)",
+          "Mongoose ODM (Schemas, Validaciones, Hooks)",
+          "Modelado de esquemas relacionales/embebidos",
+          "Pipelines de agregación y optimización de queries",
+          "Índices compuestos y paginación eficiente"
+        ],
+        "tags": ["MongoDB", "Mongoose ODM", "Schema Modeling", "Aggregations"]
+      },
+      {
+        "id": "security",
+        "code": "04 // SECURE CODING",
+        "title": "Security & Best Practices",
+        "description": "Enfoque honesto y riguroso de desarrollo seguro aplicado en cada capa de la aplicación.",
+        "skills": [
+          "Manejo de autenticación robusta mediante JWT (JSON Web Tokens)",
+          "Hashing seguro de contraseñas con bcrypt (salt rounds configurables)",
+          "Sanitización de entradas y prevención básica de NoSQL Injection",
+          "Gestión estricta de políticas CORS y variables de entorno seguras (.env)",
+          "Buenas prácticas de código guiadas por el OWASP Top 10"
+        ],
+        "toolsLabel": "Entorno & Herramientas:",
+        "tools": ["Git", "GitHub", "Postman", "Linux (Entorno Base)"]
+      }
+    ]
+  },
+  "experience": {
+    "breadcrumb": "... /Trajectory & Experience ...",
+    "title": "Trayectoria / Experiencia",
+    "subtitle": "Recorrido técnico combinando el despliegue de soluciones reales en producción con formación continua en ingeniería de software y ciberseguridad.",
+    "columns": {
+      "period": "Período / Año",
+      "role": "Rol",
+      "entity": "Entidad / Proyecto",
+      "impact": "Impacto & Enfoque Técnico"
+    },
+    "items": [
+      {
+        "period": "2026 — Presente",
+        "duration": "En curso",
+        "role": "Security Tooling & AppSec Practitioner",
+        "entity": "Config & URL Security Inspector (Open Source / Prod)",
+        "impact": "Diseño y desarrollo de auditor estático client-side de archivos .env y endpoints con arquitectura Zero-Trust (CSP connect-src 'none'). Detección determinista de secretos (JWT, Stripe, Cloud keys, DSNs), cálculo de entropía de Shannon, digest SHA-256/CSPRNG sin persistencia y sanitización de configs.",
+        "tags": ["AppSec", "DevSecOps", "Web Crypto API", "RegEx Engine", "CSP Level 3", "Zero-Trust"]
+      },
+      {
+        "period": "2026 — Presente",
+        "duration": "En producción",
+        "role": "Lead Full-Stack Developer & Software Architect",
+        "entity": "DocenBox — Suite de Gestión Docente Integral",
+        "impact": "Arquitectura y despliegue en producción de SaaS integral para gestión académica. Implementación de aislamiento multi-tenant por UID, reglas de seguridad granulares, persistencia offline, pasarela de suscripciones automatizada y prevención de colisiones horarias multiescuela con +99.9% uptime.",
+        "tags": ["React 18", "TypeScript", "Firebase Auth", "Cloud Firestore", "Vercel Serverless", "Tailwind CSS"]
+      },
+      {
+        "period": "2022 — Presente",
+        "duration": "Consultoría",
+        "role": "Full-Stack Web Developer",
+        "entity": "Proyectos Independientes & Soluciones a Medida",
+        "impact": "Desarrollo de punta a punta de aplicaciones web escalables y modulares. Construcción de APIs REST seguras, modelado de bases de datos relacionales y NoSQL, autenticación robusta y despliegue continuo de soluciones orientadas a productividad.",
+        "tags": ["React", "Node.js", "Express", "MongoDB", "REST APIs", "Git"]
+      },
+      {
+        "period": "2022 — 2023",
+        "duration": "1 año",
+        "role": "Coordinador de Mentores & Mentor Full-Stack MERN",
+        "entity": "Mindhub LA (Bootcamps & Argentina Programa)",
+        "impact": "Liderazgo y coordinación pedagógica del equipo de mentores en formación estatal. Dictado de clases en vivo de stack MERN, ejecución de code reviews rigurosos y desbloqueo de arquitectura en proyectos grupales de simulación laboral.",
+        "tags": ["React", "Node.js", "Express", "MongoDB", "JavaScript ES6+", "Liderazgo Técnico"]
+      },
+      {
+        "period": "2022 — 2023",
+        "duration": "1 año",
+        "role": "Tutor Técnico de Backend & JavaScript",
+        "entity": "Coderhouse",
+        "impact": "Acompañamiento técnico, dictado de clases de consulta y corrección de desafíos de programación en Node.js y JavaScript avanzado, guiando a los estudiantes en buenas prácticas, lógica algorítmica y diseño de APIs.",
+        "tags": ["JavaScript ES6+", "Node.js", "Express", "Backend", "Code Review"]
+      }
+    ]
+  },
+  "contact": {
+    "breadcrumb": "... /Contacts ...",
+    "title": "Hablemos sobre tu próximo proyecto",
+    "availability": "Disponible para proyectos Full-Stack y desarrollo seguro",
+    "description": "¿Buscas desarrollar una aplicación web lista para producción, escalar tu plataforma MERN o integrar buenas prácticas de seguridad en tu arquitectura? Escríbeme directamente.",
+    "emailLabel": "Correo directo",
+    "emailAddress": "kevindarnet.work@gmail.com",
+    "copyEmail": "Copiar correo",
+    "copied": "¡Copiado!",
+    "sendEmail": "Enviar Correo",
+    "location": "Argentina · Trabajo Remoto Global (UTC-3)",
+    "footerAttribution": "Desarrollado por Kevin Darnet",
+    "footerRights": "Arquitectura limpia · Stack MERN · AppSec Fundamentals"
+  }
+}

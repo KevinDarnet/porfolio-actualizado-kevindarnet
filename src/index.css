@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root,
+  html {
+    color-scheme: dark;
+    background-color: #0d0d0d;
+    color: #F5F5F5;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  body {
+    background-color: #0d0d0d;
+    color: #F5F5F5;
+    color-scheme: dark;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    overflow-x: hidden;
+    max-width: 100vw;
+    min-height: 100vh;
+  }
+
+  /* Ocultar barra de scroll para Chrome, Safari, Edge y Opera */
+  ::-webkit-scrollbar {
+    display: none !important;
+    width: 0px !important;
+    height: 0px !important;
+    background: transparent !important;
+  }
+
+  /* Ocultar barra de scroll para IE, Edge y Firefox */
+  html,
+  body,
+  #root,
+  * {
+    -ms-overflow-style: none !important; /* IE y Edge */
+    scrollbar-width: none !important; /* Firefox */
+  }
+}
+
+@layer utilities {
+  /* Utilidad para contenedores específicos con scroll */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none !important;
+    width: 0px !important;
+    height: 0px !important;
+    background: transparent !important;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+
+  /* Animación de entrada sutil para cambio de pestañas en Desktop */
+  @keyframes tabEnter {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 16px, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .animate-tab-enter {
+    animation: tabEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+/* Estilos para fórmulas matemáticas KaTeX en modo oscuro */
+.katex {
+  color: #f5f5f5;
+  font-size: 1.04em;
+}
+
+.katex-display {
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.5rem;
+  background-color: #111111;
+  border: 1px solid #262626;
+  border-radius: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+.katex-display > .katex {
+  color: #f5f5f5;
+  font-size: 1.15em;
+}
+
+/* Indicador global flotante de scroll (scroll affordance) */
+.scroll-affordance-pill {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  z-index: 50;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  background-color: rgba(20, 20, 20, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .scroll-affordance-pill {
+    bottom: 2rem;
+  }
+}
+
+.scroll-affordance-pill:hover {
+  background-color: rgba(26, 26, 26, 0.94);
+}
+
+.scroll-affordance-pill.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(12px);
+}
+
+@keyframes scrollAffordanceBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+.scroll-affordance-arrow {
+  animation: scrollAffordanceBounce 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-affordance-arrow {
+    animation: none;
+  }
+}

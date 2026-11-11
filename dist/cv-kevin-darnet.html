@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV Técnico — Kevin Darnet | Application Security & Full-Stack Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg-page: #ffffff;
+      --bg-canvas: #e2e8f0;
+      --bg-subtle: #f1f5f9;
+      --bg-card: #f8fafc;
+      --ink-primary: #0f172a;
+      --ink-secondary: #334155;
+      --ink-muted: #64748b;
+      --border-light: #e2e8f0;
+      --border-medium: #cbd5e1;
+      --accent-dark: #111827;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--ink-primary);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Barra flotante solo en pantalla para facilitar descarga como PDF */
+    .print-toolbar {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(15, 23, 42, 0.94);
+      color: #f8fafc;
+      padding: 8px 14px;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+      font-size: 12px;
+      backdrop-filter: blur(8px);
+    }
+
+    .print-toolbar span {
+      color: #cbd5e1;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+    }
+
+    .print-btn {
+      appearance: none;
+      border: 1px solid #475569;
+      background: #ffffff;
+      color: #0f172a;
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .print-btn:hover {
+      background: #e2e8f0;
+    }
+
+    .print-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Contenedor estricto de hoja A4 */
+    .sheet-wrapper {
+      display: flex;
+      justify-content: center;
+      padding: 28px 16px 40px;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      max-height: 297mm;
+      background-color: var(--bg-page);
+      padding: 0 14mm 11mm;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.16);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      position: relative;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* CABECERA EDITORIAL DE 3 COLUMNAS */
+    .header {
+      display: grid;
+      grid-template-columns: 46mm 1fr 56mm;
+      gap: 6.5mm;
+      align-items: stretch;
+      margin-bottom: 4.5mm;
+    }
+
+    .photo-panel {
+      background-color: var(--bg-subtle);
+      padding-top: 7mm;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      position: relative;
+      height: 55mm;
+      overflow: hidden;
+    }
+
+    .photo-panel::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 9mm;
+      height: 9mm;
+      background: linear-gradient(45deg, var(--accent-dark) 50%, transparent 50%);
+    }
+
+    .photo-frame {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center 14%;
+      filter: grayscale(100%) contrast(1.08);
+    }
+
+    .identity-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 2mm;
+    }
+
+    .name-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 3mm;
+    }
+
+    .name-accent {
+      width: 6px;
+      height: 24px;
+      background-color: var(--accent-dark);
+      transform: skewX(-20deg);
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    .full-name {
+      font-size: 25pt;
+      line-height: 0.96;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--ink-primary);
+      text-transform: uppercase;
+    }
+
+    .full-name span {
+      display: block;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .role-row {
+      display: flex;
+      align-items: center;
+      gap: 2.5mm;
+      margin-top: 3.5mm;
+      padding-left: 1mm;
+    }
+
+    .role-bar {
+      width: 2px;
+      height: 16px;
+      background-color: var(--ink-primary);
+      flex-shrink: 0;
+    }
+
+    .role-title {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 7.7pt;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-secondary);
+      line-height: 1.25;
+    }
+
+    .contact-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 2mm;
+      position: relative;
+      padding-left: 4mm;
+    }
+
+    .contact-column::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 36mm;
+      width: 1px;
+      background-color: var(--border-medium);
+    }
+
+    .contact-column::after {
+      content: "";
+      position: absolute;
+      left: -1.5px;
+      top: 35.5mm;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: var(--ink-primary);
+    }
+
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5mm;
+      font-size: 7.5pt;
+      line-height: 1.3;
+      color: var(--ink-secondary);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: baseline;
+      gap: 1.6mm;
+      white-space: nowrap;
+    }
+
+    .contact-label {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 700;
+      font-size: 7.2pt;
+      color: var(--ink-primary);
+      min-width: 11px;
+    }
+
+    .contact-link {
+      color: var(--ink-secondary);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .contact-link:hover {
+      color: var(--ink-primary);
+      border-bottom-color: var(--ink-primary);
+      text-decoration: none;
+    }
+
+    /* PERFIL PROFESIONAL */
+    .profile-section {
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      padding: 3.2mm 0;
+      margin-bottom: 4.5mm;
+    }
+
+    .profile-text {
+      font-size: 8.6pt;
+      line-height: 1.48;
+      color: var(--ink-secondary);
+      text-align: left;
+    }
+
+    /* CUERPO PRINCIPAL DE 2 COLUMNAS */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 34% 66%;
+      flex: 1 1 auto;
+      min-height: 0;
+      margin-bottom: 3.5mm;
+    }
+
+    .left-col {
+      padding-right: 6.5mm;
+      display: flex;
+      flex-direction: column;
+      gap: 5.5mm;
+    }
+
+    .right-col {
+      position: relative;
+      padding-left: 7mm;
+      border-left: 1px solid var(--border-medium);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section-title {
+      font-size: 9.2pt;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-primary);
+      margin-bottom: 3mm;
+    }
+
+    .skill-group {
+      margin-bottom: 3.8mm;
+    }
+
+    .skill-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .skill-group-title {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 7.2pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--ink-primary);
+      margin-bottom: 1.6mm;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25mm;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 3.2mm;
+      font-size: 7.9pt;
+      line-height: 1.38;
+      color: var(--ink-secondary);
+    }
+
+    .bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--ink-primary);
+      font-weight: 700;
+    }
+
+    .edu-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2.8mm;
+    }
+
+    .edu-item-title {
+      font-size: 8.1pt;
+      font-weight: 700;
+      color: var(--ink-primary);
+      line-height: 1.3;
+    }
+
+    .edu-item-meta {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 7.2pt;
+      color: var(--ink-muted);
+      margin-top: 0.5mm;
+    }
+
+    .edu-item-desc {
+      font-size: 7.8pt;
+      line-height: 1.38;
+      color: var(--ink-secondary);
+      margin-top: 0.8mm;
+    }
+
+    /* PROYECTOS Y SISTEMAS EN PRODUCCIÓN */
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3.8mm;
+    }
+
+    .project-card {
+      position: relative;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      left: -8.65mm;
+      top: 4.5px;
+      width: 5.5px;
+      height: 5.5px;
+      border-radius: 50%;
+      background-color: var(--ink-primary);
+      border: 1.5px solid #ffffff;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 3mm;
+      margin-bottom: 0.7mm;
+    }
+
+    .project-title {
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--ink-primary);
+      line-height: 1.25;
+    }
+
+    .project-title a {
+      border-bottom: 1px solid var(--border-medium);
+    }
+
+    .project-title a:hover {
+      border-bottom-color: var(--ink-primary);
+      text-decoration: none;
+    }
+
+    .project-links {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 6.9pt;
+      color: var(--ink-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .project-links a {
+      color: var(--ink-secondary);
+      font-weight: 500;
+    }
+
+    .project-stack {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 7.1pt;
+      color: var(--ink-muted);
+      margin-bottom: 1mm;
+      line-height: 1.3;
+    }
+
+    .project-desc {
+      font-size: 8pt;
+      line-height: 1.38;
+      color: var(--ink-secondary);
+      margin-bottom: 1.2mm;
+    }
+
+    .security-highlight {
+      background-color: var(--bg-card);
+      border-left: 2px solid var(--ink-primary);
+      padding: 1.4mm 2.5mm;
+      font-size: 7.75pt;
+      line-height: 1.36;
+      color: var(--ink-primary);
+    }
+
+    .security-label {
+      font-weight: 700;
+    }
+
+    /* PIE DE PÁGINA / RESUMEN DE TECNOLOGÍAS (3 COLUMNAS PLANAS) */
+    .footer-tech {
+      border-top: 1px solid var(--border-light);
+      padding-top: 3.5mm;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5mm;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .footer-col {
+      padding-left: 3mm;
+      border-left: 1px solid var(--border-light);
+    }
+
+    .footer-col:first-child {
+      padding-left: 0;
+      border-left: none;
+    }
+
+    .footer-heading {
+      font-size: 7.8pt;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-primary);
+      margin-bottom: 1mm;
+    }
+
+    .footer-items {
+      font-size: 7.7pt;
+      line-height: 1.42;
+      color: var(--ink-secondary);
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    @media print {
+      html,
+      body {
+        background: #ffffff !important;
+        width: 210mm;
+        height: 296.5mm;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .sheet-wrapper {
+        padding: 0;
+        margin: 0;
+        display: block;
+      }
+
+      .page {
+        width: 210mm;
+        height: 296.5mm;
+        max-height: 296.5mm;
+        margin: 0;
+        box-shadow: none;
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-toolbar no-print">
+    <span>Vista A4 Imprimible</span>
+    <button class="print-btn" type="button" onclick="window.print()">
+      Imprimir / Guardar PDF
+    </button>
+  </div>
+
+  <div class="sheet-wrapper">
+    <main class="page">
+      <!-- CABECERA EDITORIAL -->
+      <header class="header">
+        <div class="photo-panel">
+          <img
+            src="./kevin-darnet-photo.png"
+            alt="Retrato profesional de Kevin Darnet"
+            class="photo-frame"
+          />
+        </div>
+
+        <div class="identity-block">
+          <div class="name-row">
+            <div class="name-accent" aria-hidden="true"></div>
+            <h1 class="full-name">
+              Kevin
+              <span>Darnet</span>
+            </h1>
+          </div>
+          <div class="role-row">
+            <div class="role-bar" aria-hidden="true"></div>
+            <p class="role-title">Application Security &amp; Full-Stack Engineer</p>
+          </div>
+        </div>
+
+        <div class="contact-column" aria-label="Canales digitales de contacto">
+          <ul class="contact-list">
+            <li class="contact-item">
+              <span class="contact-label">W:</span>
+              <a
+                class="contact-link"
+                href="https://kevindarnet-portfolio.web.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                kevindarnet-portfolio.web.app
+              </a>
+            </li>
+            <li class="contact-item">
+              <span class="contact-label">E:</span>
+              <a class="contact-link" href="mailto:kevindarnet.work@gmail.com">
+                kevindarnet.work@gmail.com
+              </a>
+            </li>
+            <li class="contact-item">
+              <span class="contact-label">G:</span>
+              <a
+                class="contact-link"
+                href="https://github.com/KevinDarnet"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                github.com/KevinDarnet
+              </a>
+            </li>
+            <li class="contact-item">
+              <span class="contact-label">L:</span>
+              <a
+                class="contact-link"
+                href="https://www.linkedin.com/in/kevin-darnet"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                linkedin.com/in/kevin-darnet
+              </a>
+            </li>
+          </ul>
+        </div>
+      </header>
+
+      <!-- PERFIL PROFESIONAL -->
+      <section class="profile-section" aria-label="Perfil profesional">
+        <p class="profile-text">
+          Desarrollador web MERN enfocado en el ciclo de vida seguro de las aplicaciones (SSDLC) y
+          arquitectura resiliente. Enfoque en mitigación temprana de vulnerabilidades (Shift-Left),
+          diseño de APIs protegidas y buenas prácticas de ingeniería de software. Próximo estudiante de
+          la Licenciatura en Ciberdefensa.
+        </p>
+      </section>
+
+      <!-- CUERPO PRINCIPAL DE 2 COLUMNAS -->
+      <div class="main-grid">
+        <!-- COLUMNA IZQUIERDA (34%) -->
+        <aside class="left-col">
+          <section aria-label="Habilidades técnicas">
+            <h2 class="section-title">Habilidades</h2>
+
+            <div class="skill-group">
+              <h3 class="skill-group-title">// DESARROLLO CORE</h3>
+              <ul class="bullet-list">
+                <li>Stack MERN (MongoDB, Express, React, Node.js)</li>
+                <li>JavaScript (ES6+) y TypeScript estricto</li>
+                <li>APIs RESTful, arquitectura modular y Redux Toolkit</li>
+                <li>Tailwind CSS, Vite, Firebase Auth y Cloud Firestore</li>
+                <li>Persistencia offline-first y despliegue en producción</li>
+              </ul>
+            </div>
+
+            <div class="skill-group">
+              <h3 class="skill-group-title">// APPSEC &amp; CIBERDEFENSA</h3>
+              <ul class="bullet-list">
+                <li>Estándares OWASP Top 10 y ciclo SSDLC (Shift-Left)</li>
+                <li>Autenticación robusta (JWT, bcrypt y control por UID)</li>
+                <li>Mitigación de NoSQL Injection, XSS y cabeceras CSP</li>
+                <li>Rate-limiting, CORS estricto y hardening con Helmet</li>
+                <li>Detección de secretos por entropía y hashing SHA-256</li>
+              </ul>
+            </div>
+          </section>
+
+          <section aria-label="Formación académica">
+            <h2 class="section-title">Formación Académica</h2>
+            <div class="edu-block">
+              <div>
+                <div class="edu-item-title">Licenciatura en Ciberdefensa</div>
+                <div class="edu-item-meta">Ingreso 2027</div>
+                <p class="edu-item-desc">
+                  Formación orientada a defensa de infraestructuras críticas, análisis de amenazas y
+                  seguridad de sistemas.
+                </p>
+              </div>
+              <div>
+                <div class="edu-item-title">Desarrollo Web Full-Stack &amp; AppSec</div>
+                <div class="edu-item-meta">Especialización Continua</div>
+                <p class="edu-item-desc">
+                  Especialización continua en desarrollo web seguro, arquitectura defensiva y buenas
+                  prácticas de código.
+                </p>
+              </div>
+            </div>
+          </section>
+        </aside>
+
+        <!-- COLUMNA DERECHA (66%) -->
+        <section class="right-col" aria-label="Proyectos y sistemas en producción">
+          <h2 class="section-title">Proyectos y Sistemas en Producción</h2>
+
+          <div class="projects-list">
+            <!-- Proyecto 1 -->
+            <article class="project-card">
+              <div class="project-header">
+                <h3 class="project-title">
+                  <a
+                    href="https://docenbox.web.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    DocenBox — Suite de Gestión Docente Integral
+                  </a>
+                </h3>
+                <div class="project-links">
+                  <a href="https://docenbox.web.app" target="_blank" rel="noopener noreferrer">
+                    Live
+                  </a>
+                  ·
+                  <a
+                    href="https://github.com/KevinDarnet/docenbox"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Repo
+                  </a>
+                </div>
+              </div>
+              <div class="project-stack">
+                React 18 · TypeScript · Firebase Auth · Cloud Firestore · Tailwind CSS · Vercel Serverless
+              </div>
+              <p class="project-desc">
+                Plataforma en producción para gestión académica integral, asistencias y seguimiento de
+                cursadas con disponibilidad continua superior al 99.9%.
+              </p>
+              <div class="security-highlight">
+                <span class="security-label">Medida de Seguridad / Hardening implementada:</span>
+                Aislamiento multi-tenant por UID mediante reglas granulares en Cloud Firestore,
+                persistencia offline segura y protección de integridad con Soft Delete.
+              </div>
+            </article>
+
+            <!-- Proyecto 2 -->
+            <article class="project-card">
+              <div class="project-header">
+                <h3 class="project-title">
+                  <a
+                    href="https://config-and-url-sec-inspector.web.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Config &amp; URL Security Inspector
+                  </a>
+                </h3>
+                <div class="project-links">
+                  <a
+                    href="https://config-and-url-sec-inspector.web.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Live
+                  </a>
+                  ·
+                  <a
+                    href="https://github.com/KevinDarnet/config-url-security-inspector"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Repo
+                  </a>
+                </div>
+              </div>
+              <div class="project-stack">
+                JavaScript (ES6+) · Web Crypto API · RegEx Engine · CSP Level 3 · Tailwind CSS
+              </div>
+              <p class="project-desc">
+                Herramienta AppSec orientada a auditar archivos de configuración (.env, JSON) y URLs
+                sospechosas directamente en el navegador sin telemetría externa.
+              </p>
+              <div class="security-highlight">
+                <span class="security-label">Medida de Seguridad / Hardening implementada:</span>
+                Arquitectura Zero-Trust 100% client-side con <code>CSP connect-src 'none'</code>,
+                detección de credenciales por entropía de Shannon, digest SHA-256 local y cero
+                persistencia en storage.
+              </div>
+            </article>
+
+            <!-- Proyecto 3 -->
+            <article class="project-card">
+              <div class="project-header">
+                <h3 class="project-title">
+                  <a
+                    href="https://github.com/KevinDarnet"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    AppSec Auth &amp; API Gateway Boilerplate
+                  </a>
+                </h3>
+                <div class="project-links">
+                  <a
+                    href="https://github.com/KevinDarnet"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub
+                  </a>
+                </div>
+              </div>
+              <div class="project-stack">
+                Node.js · Express · MongoDB · JWT Auth · bcrypt · Estándares OWASP
+              </div>
+              <p class="project-desc">
+                Arquitectura base para APIs RESTful y microservicios diseñada bajo principios de
+                seguridad desde el diseño para despliegues backend confiables.
+              </p>
+              <div class="security-highlight">
+                <span class="security-label">Medida de Seguridad / Hardening implementada:</span>
+                Defensa en profundidad con rate-limiting, sanitización preventiva contra NoSQL
+                Injection, cabeceras HTTP seguras (Helmet), CORS estricto, hashing con bcrypt y
+                rotación de tokens JWT.
+              </div>
+            </article>
+
+            <!-- Proyecto 4 -->
+            <article class="project-card">
+              <div class="project-header">
+                <h3 class="project-title">
+                  <a
+                    href="https://mytinerary-ac285.web.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    MyTinerary — Red de Viajes e Itinerarios
+                  </a>
+                </h3>
+                <div class="project-links">
+                  <a
+                    href="https://mytinerary-ac285.web.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Demo
+                  </a>
+                  ·
+                  <a
+                    href="https://github.com/KevinDarnet/MyTinerary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Repo
+                  </a>
+                </div>
+              </div>
+              <div class="project-stack">
+                React · Redux Toolkit · Node.js · Express · MongoDB · JWT · Tailwind CSS
+              </div>
+              <p class="project-desc">
+                Aplicación full-stack MERN para exploración de destinos, autenticación de cuentas y
+                gestión personalizada de itinerarios turísticos.
+              </p>
+              <div class="security-highlight">
+                <span class="security-label">Medida de Seguridad / Hardening implementada:</span>
+                Control de sesiones stateless mediante JWT, validación de rutas protegidas en
+                middleware y sanitización de operadores en consultas a base de datos.
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <!-- PIE DE PÁGINA: RESUMEN DE TECNOLOGÍAS EN 3 COLUMNAS PLANAS -->
+      <footer class="footer-tech" aria-label="Resumen de tecnologías">
+        <div class="footer-col">
+          <h3 class="footer-heading">Frontend &amp; Backend</h3>
+          <p class="footer-items">React, Node.js, Express, MongoDB.</p>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-heading">Seguridad Aplicada</h3>
+          <p class="footer-items">
+            Estándares OWASP, autenticación segura, cifrado y sanitización.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-heading">Entorno y Herramientas</h3>
+          <p class="footer-items">Git, Linux, Postman, Vite, Firebase.</p>
+        </div>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

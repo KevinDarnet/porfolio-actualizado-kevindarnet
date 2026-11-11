@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   ArrowUpRight,
   ArrowDownRight,
@@ -9,7 +9,6 @@ import {
   Code2,
   CheckCircle2,
   FileText,
-  Loader2,
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useNavigation } from '../context/NavigationContext';
@@ -18,41 +17,34 @@ import Reveal from './Reveal';
 const pointIcons = [Code2, ShieldCheck, CheckCircle2];
 
 export default function Hero() {
-  const { language, t } = useLanguage();
+  const { t } = useLanguage();
   const { navigateTo } = useNavigation();
-  const [isGeneratingCv, setIsGeneratingCv] = useState(false);
+  const [isCvMenuOpen, setIsCvMenuOpen] = useState(false);
+  const cvMenuRef = useRef(null);
 
-  const generateTechnicalCV = async () => {
-    if (isGeneratingCv) return;
-    setIsGeneratingCv(true);
+  useEffect(() => {
+    if (!isCvMenuOpen) return undefined;
 
-    try {
-      const [{ generateTechnicalCvPdf }, { getAllPosts }] = await Promise.all([
-        import('../utils/cvPdfGenerator'),
-        import('../utils/posts'),
-      ]);
+    const handleClickOutside = (event) => {
+      if (cvMenuRef.current && !cvMenuRef.current.contains(event.target)) {
+        setIsCvMenuOpen(false);
+      }
+    };
 
-      const posts = getAllPosts();
-      const { blob, fileName } = await generateTechnicalCvPdf({
-        t,
-        posts,
-        language,
-      });
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setIsCvMenuOpen(false);
+      }
+    };
 
-      const objectUrl = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = objectUrl;
-      link.download = fileName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      setTimeout(() => URL.revokeObjectURL(objectUrl), 1500);
-    } catch (error) {
-      console.error('[CV] Error al generar el CV Técnico en PDF:', error);
-    } finally {
-      setIsGeneratingCv(false);
-    }
-  };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isCvMenuOpen]);
 
   const socialLinks = [
     {
@@ -108,7 +100,7 @@ export default function Hero() {
         {/* Main Asymmetric Editorial Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
           {/* Left Column (8 cols): Imposing Title, Tagline, Pill CTAs & Social Chips */}
-          <Reveal delay={50} className="lg:col-span-8 flex flex-col justify-between rounded-3xl bg-[#141414] border border-[#262626] p-6 sm:p-10 lg:p-12 hover:border-[#383838] transition-colors duration-300">
+          <Reveal delay={50} className="relative z-20 lg:col-span-8 flex flex-col justify-between rounded-3xl bg-[#141414] border border-[#262626] p-6 sm:p-10 lg:p-12 hover:border-[#383838] transition-colors duration-300">
             <div>
               {/* Status indicator */}
               <div className="inline-flex items-center gap-2 font-mono text-xs text-[#A0A0A0] mb-6">
@@ -154,25 +146,63 @@ export default function Hero() {
                   </span>
                 </a>
 
-                <button
-                  type="button"
-                  onClick={generateTechnicalCV}
-                  disabled={isGeneratingCv}
-                  aria-busy={isGeneratingCv}
-                  className="group inline-flex items-center gap-2.5 rounded-full bg-[#1e1e1e] text-[#F5F5F5] border border-[#333333] hover:border-[#F5F5F5] disabled:opacity-75 disabled:cursor-wait px-6 py-3.5 font-mono text-xs sm:text-sm font-medium transition-all duration-300"
-                >
-                  {isGeneratingCv ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin text-emerald-400" />
-                      <span>{t.hero.ctaCvGenerating || 'Generando CV...'}</span>
-                    </>
-                  ) : (
-                    <>
-                      <FileText className="w-4 h-4 text-[#A0A0A0] group-hover:text-emerald-400 transition-colors duration-300" />
-                      <span>{t.hero.ctaCv || 'CV Técnico'}</span>
-                    </>
+                {/* Dropdown selector de formato de CV estático */}
+                <div ref={cvMenuRef} className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setIsCvMenuOpen((prev) => !prev)}
+                    aria-expanded={isCvMenuOpen}
+                    aria-haspopup="menu"
+                    className={`group inline-flex items-center gap-2.5 rounded-full bg-[#1e1e1e] text-[#F5F5F5] border px-6 py-3.5 font-mono text-xs sm:text-sm font-medium transition-all duration-300 ${
+                      isCvMenuOpen
+                        ? 'border-emerald-500/50 bg-[#232323]'
+                        : 'border-[#333333] hover:border-[#F5F5F5]'
+                    }`}
+                  >
+                    <FileText className="w-4 h-4 text-[#A0A0A0] group-hover:text-emerald-400 transition-colors duration-300" />
+                    <span>{t.hero.ctaCv || 'CV Técnico'}</span>
+                    <span
+                      aria-hidden="true"
+                      className={`text-xs text-[#A0A0A0] group-hover:text-[#F5F5F5] transition-transform duration-200 ${
+                        isCvMenuOpen ? 'rotate-180 text-emerald-400' : ''
+                      }`}
+                    >
+                      ▾
+                    </span>
+                  </button>
+
+                  {isCvMenuOpen && (
+                    <div
+                      role="menu"
+                      aria-label={t.hero.ctaCv || 'CV Técnico'}
+                      className="absolute left-0 top-full mt-2.5 w-64 sm:w-72 z-30 rounded-xl bg-[#111317] border border-white/10 shadow-2xl p-1.5 backdrop-blur-md"
+                    >
+                      <a
+                        role="menuitem"
+                        href="/cv-kevin-darnet-dark.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setIsCvMenuOpen(false)}
+                        className="flex items-center justify-between gap-2 w-full rounded-lg px-3.5 py-2.5 font-mono text-xs text-[#E5E5E5] hover:bg-emerald-500/10 hover:text-emerald-300 border border-transparent hover:border-emerald-500/20 transition-all duration-200"
+                      >
+                        <span>{t.hero.ctaCvDark || '🌙 Versión Oscura (Tema Web)'}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 shrink-0 opacity-70" />
+                      </a>
+
+                      <a
+                        role="menuitem"
+                        href="/cv-kevin-darnet-light.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setIsCvMenuOpen(false)}
+                        className="mt-1 flex items-center justify-between gap-2 w-full rounded-lg px-3.5 py-2.5 font-mono text-xs text-[#E5E5E5] hover:bg-emerald-500/10 hover:text-emerald-300 border border-transparent hover:border-emerald-500/20 transition-all duration-200"
+                      >
+                        <span>{t.hero.ctaCvLight || '☀️ Versión Clara (ATS / Imprimible)'}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 shrink-0 opacity-70" />
+                      </a>
+                    </div>
                   )}
-                </button>
+                </div>
               </div>
 
               {/* Quick Access Links: Contáctame + Social Quick Chips */}

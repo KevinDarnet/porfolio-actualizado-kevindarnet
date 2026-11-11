@@ -12,28 +12,29 @@
   },
   "hero": {
     "breadcrumb": "... /About me ...",
-    "rolePrefix": "Full-Stack Developer",
-    "roleHighlight": "& AppSec Enthusiast",
+    "rolePrefix": "Application Security",
+    "roleHighlight": "& Full-Stack Engineer",
     "badge": "Cybersecurity Student | AppSec Fundamentals",
-    "status": "Active Production Systems & Secure Dev",
-    "tagline": "Building scalable and secure web applications, embedding AppSec practices, risk analysis, and automated security controls from early lifecycle stages (Shift-Left).",
-    "ctaPrimary": "Projects",
+    "status": "Resilient Software & Cyber Defense",
+    "tagline": "MERN web developer specialized in the Secure Software Development Life Cycle (SSDLC). I combine software engineering with early risk detection and vulnerability analysis while formally pursuing a Bachelor's degree in Cyber Defense.",
+    "ctaPrimary": "Cases & Projects",
+    "ctaCv": "Technical CV",
     "ctaSecondary": "Contact Me",
     "profileHeader": "// TECHNICAL PROFILE",
-    "profileBadge": "Full-Stack & AppSec",
-    "profileSummary": "End-to-end development integrating security best practices into the code: rigorous validation, scalable architecture, and continuous deployment.",
+    "profileBadge": "AppSec & Cyber Defense",
+    "profileSummary": "Defensive engineering applied to code: attack surface analysis, robust access control, and secure pipelines for production environments.",
     "profilePoints": [
       {
-        "label": "Core stack",
-        "value": "React, Node.js, Express, MongoDB."
+        "label": "Core Development",
+        "value": "Node.js, Express, React, MongoDB, modular architecture."
       },
       {
-        "label": "AppSec practices",
-        "value": "OWASP guidelines, sanitization, and robust auth."
+        "label": "Code Defense",
+        "value": "Applied cryptography, injection prevention (SQL/NoSQL/XSS), secure session management."
       },
       {
-        "label": "Approach",
-        "value": "Production-ready software and maintainable code."
+        "label": "Academic Roadmap",
+        "value": "B.Sc. in Cyber Defense (2027 intake), PortSwigger Academy, TryHackMe."
       }
     ],
     "socials": {

@@ -8,6 +8,7 @@ import {
   Mail,
   Code2,
   CheckCircle2,
+  FileText,
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useNavigation } from '../context/NavigationContext';
@@ -39,16 +40,16 @@ export default function Hero() {
 
   const defaultPoints = [
     {
-      label: 'Stack principal',
-      value: 'React, Node.js, Express, MongoDB.',
+      label: 'Desarrollo Core',
+      value: 'Node.js, Express, React, MongoDB, arquitectura modular.',
     },
     {
-      label: 'Prácticas AppSec',
-      value: 'Criterios OWASP, sanitización y autenticación robusta.',
+      label: 'Defensa en Código',
+      value: 'Criptografía aplicada, control de inyecciones (SQL/NoSQL/XSS), gestión segura de sesiones.',
     },
     {
-      label: 'Enfoque',
-      value: 'Software listo para producción y código mantenible.',
+      label: 'Roadmap Académico',
+      value: 'Licenciatura en Ciberdefensa (ingreso 2027), PortSwigger Academy, TryHackMe.',
     },
   ];
 
@@ -101,9 +102,9 @@ export default function Hero() {
               </p>
             </div>
 
-            {/* CTAs & Social Chips */}
-            <div className="mt-10 pt-8 border-t border-[#242424] flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-              {/* Primary & Secondary Pill CTAs */}
+            {/* CTAs & Quick Links */}
+            <div className="mt-10 pt-8 border-t border-[#242424] flex flex-col gap-5">
+              {/* Primary & Secondary Outline CTAs */}
               <div className="flex flex-wrap items-center gap-3.5">
                 <a
                   href="#projects"
@@ -120,20 +121,31 @@ export default function Hero() {
                 </a>
 
                 <a
+                  href="/cv-kevin-darnet.pdf"
+                  download="CV-Kevin-Darnet.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2.5 rounded-full bg-[#1e1e1e] text-[#F5F5F5] border border-[#333333] hover:border-[#F5F5F5] px-6 py-3.5 font-mono text-xs sm:text-sm font-medium transition-all duration-300"
+                >
+                  <FileText className="w-4 h-4 text-[#A0A0A0] group-hover:text-[#F5F5F5] transition-colors duration-300" />
+                  <span>{t.hero.ctaCv || 'CV Técnico'}</span>
+                </a>
+              </div>
+
+              {/* Quick Access Links: Contáctame + Social Quick Chips */}
+              <div className="flex flex-wrap items-center gap-2" aria-label="Accesos rápidos y redes profesionales">
+                <a
                   href="#contact"
                   onClick={(e) => {
                     e.preventDefault();
                     navigateTo('contact');
                   }}
-                  className="group inline-flex items-center gap-2.5 rounded-full bg-[#1e1e1e] text-[#F5F5F5] border border-[#333333] hover:border-[#F5F5F5] px-6 py-3.5 font-mono text-xs sm:text-sm font-medium transition-all duration-300"
+                  className="group inline-flex items-center gap-1.5 rounded-full bg-[#1b1b1b] border border-[#2e2e2e] hover:border-[#F5F5F5] px-3.5 py-2 font-mono text-xs text-[#F5F5F5] transition-all duration-300"
                 >
                   <span>{t.hero.ctaSecondary}</span>
-                  <ArrowUpRight className="w-4 h-4 text-[#A0A0A0] group-hover:text-[#F5F5F5] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#A0A0A0] group-hover:text-[#F5F5F5] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
                 </a>
-              </div>
 
-              {/* Social Quick Chips */}
-              <div className="flex flex-wrap items-center gap-2" aria-label="Redes profesionales">
                 {socialLinks.map((social) => {
                   const Icon = social.icon;
                   return (
@@ -157,20 +169,20 @@ export default function Hero() {
           <Reveal delay={180} className="lg:col-span-4 flex">
             <div className="w-full rounded-3xl bg-[#141414] border border-[#262626] p-6 sm:p-8 lg:p-8 flex flex-col justify-start hover:border-[#383838] transition-colors duration-300">
               {/* Header row: // PERFIL TÉCNICO + Badge sutil */}
-              <div className="flex items-center justify-between gap-3 mb-4">
-                <span className="font-mono text-xs uppercase tracking-widest text-[#888888]">
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                <span className="font-mono text-xs uppercase tracking-widest text-[#888888] whitespace-nowrap">
                   {t.hero.profileHeader || '// PERFIL TÉCNICO'}
                 </span>
-                <span className="inline-flex items-center gap-1.5 font-mono text-[11px] font-medium text-emerald-400 bg-[#111f17] border border-emerald-500/30 rounded-full px-2.5 py-0.5">
+                <span className="inline-flex items-center gap-1.5 font-mono text-[11px] font-medium text-emerald-400 bg-[#111f17] border border-emerald-500/30 rounded-full px-2.5 py-0.5 whitespace-nowrap shrink-0">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  {t.hero.profileBadge || 'Full-Stack & AppSec'}
+                  {t.hero.profileBadge || 'AppSec & Ciberdefensa'}
                 </span>
               </div>
 
               {/* Breve resumen enfocado */}
               <p className="text-sm sm:text-base text-[#CFCFCF] leading-relaxed font-normal">
                 {t.hero.profileSummary ||
-                  'Desarrollo de punta a punta integrando buenas prácticas de seguridad desde el código: validación rigurosa, arquitectura escalable y despliegue continuo.'}
+                  'Enfoque defensivo aplicado al código: análisis de superficie de ataque, control de acceso robusto y pipelines seguros para entornos de producción.'}
               </p>
 
               {/* Divisor sutil natural */}

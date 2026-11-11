@@ -12,28 +12,29 @@
   },
   "hero": {
     "breadcrumb": "... /About me ...",
-    "rolePrefix": "Full-Stack Developer",
-    "roleHighlight": "& AppSec Enthusiast",
+    "rolePrefix": "Application Security",
+    "roleHighlight": "& Full-Stack Engineer",
     "badge": "Cybersecurity Student | AppSec Fundamentals",
-    "status": "Sistemas Activos & Desarrollo Seguro",
-    "tagline": "Construyo aplicaciones web seguras y escalables, integrando prácticas de AppSec, análisis de riesgos y automatización de seguridad desde las primeras etapas del ciclo de vida (Shift-Left).",
-    "ctaPrimary": "Proyectos",
+    "status": "Software Resiliente & Ciberdefensa",
+    "tagline": "Desarrollador web MERN especializado en el ciclo de vida seguro de las aplicaciones (SSDLC). Combino la creación de software con la detección temprana de riesgos y análisis de vulnerabilidades, preparándome formalmente en la Licenciatura en Ciberdefensa.",
+    "ctaPrimary": "Casos y Proyectos",
+    "ctaCv": "CV Técnico",
     "ctaSecondary": "Contáctame",
     "profileHeader": "// PERFIL TÉCNICO",
-    "profileBadge": "Full-Stack & AppSec",
-    "profileSummary": "Desarrollo de punta a punta integrando buenas prácticas de seguridad desde el código: validación rigurosa, arquitectura escalable y despliegue continuo.",
+    "profileBadge": "AppSec & Ciberdefensa",
+    "profileSummary": "Enfoque defensivo aplicado al código: análisis de superficie de ataque, control de acceso robusto y pipelines seguros para entornos de producción.",
     "profilePoints": [
       {
-        "label": "Stack principal",
-        "value": "React, Node.js, Express, MongoDB."
+        "label": "Desarrollo Core",
+        "value": "Node.js, Express, React, MongoDB, arquitectura modular."
       },
       {
-        "label": "Prácticas AppSec",
-        "value": "Criterios OWASP, sanitización y autenticación robusta."
+        "label": "Defensa en Código",
+        "value": "Criptografía aplicada, control de inyecciones (SQL/NoSQL/XSS), gestión segura de sesiones."
       },
       {
-        "label": "Enfoque",
-        "value": "Software listo para producción y código mantenible."
+        "label": "Roadmap Académico",
+        "value": "Licenciatura en Ciberdefensa (ingreso 2027), PortSwigger Academy, TryHackMe."
       }
     ],
     "socials": {

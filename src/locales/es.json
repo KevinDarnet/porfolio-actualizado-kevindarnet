@@ -130,7 +130,7 @@
           "Gestión segura de credenciales con hashing bcrypt y tokens JWT rotativos."
         ],
         "demoUrl": "",
-        "repoUrl": "https://github.com/KevinDarnet"
+        "repoUrl": "https://github.com/KevinDarnet/AppSec-Auth-API-Gateway-Boilerplate"
       },
       {
         "id": "proj-4",

@@ -19,6 +19,7 @@
     "tagline": "Desarrollador web MERN especializado en el ciclo de vida seguro de las aplicaciones (SSDLC). Combino la creación de software con la detección temprana de riesgos y análisis de vulnerabilidades, preparándome formalmente en la Licenciatura en Ciberdefensa.",
     "ctaPrimary": "Casos y Proyectos",
     "ctaCv": "CV Técnico",
+    "ctaCvGenerating": "Generando CV...",
     "ctaSecondary": "Contáctame",
     "profileHeader": "// PERFIL TÉCNICO",
     "profileBadge": "AppSec & Ciberdefensa",
@@ -34,7 +35,7 @@
       },
       {
         "label": "Roadmap Académico",
-        "value": "Licenciatura en Ciberdefensa (ingreso 2027), PortSwigger Academy, TryHackMe."
+        "value": "Licenciatura en Ciberdefensa (ingreso 2027), especialización continua en seguridad y desarrollo web."
       }
     ],
     "socials": {

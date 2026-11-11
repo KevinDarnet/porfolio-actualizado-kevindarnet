@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ArrowUpRight,
   ArrowDownRight,
@@ -9,6 +9,7 @@ import {
   Code2,
   CheckCircle2,
   FileText,
+  Loader2,
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useNavigation } from '../context/NavigationContext';
@@ -17,8 +18,41 @@ import Reveal from './Reveal';
 const pointIcons = [Code2, ShieldCheck, CheckCircle2];
 
 export default function Hero() {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const { navigateTo } = useNavigation();
+  const [isGeneratingCv, setIsGeneratingCv] = useState(false);
+
+  const generateTechnicalCV = async () => {
+    if (isGeneratingCv) return;
+    setIsGeneratingCv(true);
+
+    try {
+      const [{ generateTechnicalCvPdf }, { getAllPosts }] = await Promise.all([
+        import('../utils/cvPdfGenerator'),
+        import('../utils/posts'),
+      ]);
+
+      const posts = getAllPosts();
+      const { blob, fileName } = await generateTechnicalCvPdf({
+        t,
+        posts,
+        language,
+      });
+
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = objectUrl;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 1500);
+    } catch (error) {
+      console.error('[CV] Error al generar el CV Técnico en PDF:', error);
+    } finally {
+      setIsGeneratingCv(false);
+    }
+  };
 
   const socialLinks = [
     {
@@ -49,7 +83,7 @@ export default function Hero() {
     },
     {
       label: 'Roadmap Académico',
-      value: 'Licenciatura en Ciberdefensa (ingreso 2027), PortSwigger Academy, TryHackMe.',
+      value: 'Licenciatura en Ciberdefensa (ingreso 2027), especialización continua en seguridad y desarrollo web.',
     },
   ];
 
@@ -120,16 +154,25 @@ export default function Hero() {
                   </span>
                 </a>
 
-                <a
-                  href="/cv-kevin-darnet.pdf"
-                  download="CV-Kevin-Darnet.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2.5 rounded-full bg-[#1e1e1e] text-[#F5F5F5] border border-[#333333] hover:border-[#F5F5F5] px-6 py-3.5 font-mono text-xs sm:text-sm font-medium transition-all duration-300"
+                <button
+                  type="button"
+                  onClick={generateTechnicalCV}
+                  disabled={isGeneratingCv}
+                  aria-busy={isGeneratingCv}
+                  className="group inline-flex items-center gap-2.5 rounded-full bg-[#1e1e1e] text-[#F5F5F5] border border-[#333333] hover:border-[#F5F5F5] disabled:opacity-75 disabled:cursor-wait px-6 py-3.5 font-mono text-xs sm:text-sm font-medium transition-all duration-300"
                 >
-                  <FileText className="w-4 h-4 text-[#A0A0A0] group-hover:text-[#F5F5F5] transition-colors duration-300" />
-                  <span>{t.hero.ctaCv || 'CV Técnico'}</span>
-                </a>
+                  {isGeneratingCv ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-emerald-400" />
+                      <span>{t.hero.ctaCvGenerating || 'Generando CV...'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <FileText className="w-4 h-4 text-[#A0A0A0] group-hover:text-emerald-400 transition-colors duration-300" />
+                      <span>{t.hero.ctaCv || 'CV Técnico'}</span>
+                    </>
+                  )}
+                </button>
               </div>
 
               {/* Quick Access Links: Contáctame + Social Quick Chips */}

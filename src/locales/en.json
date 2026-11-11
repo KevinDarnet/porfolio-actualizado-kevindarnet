@@ -19,6 +19,7 @@
     "tagline": "MERN web developer specialized in the Secure Software Development Life Cycle (SSDLC). I combine software engineering with early risk detection and vulnerability analysis while formally pursuing a Bachelor's degree in Cyber Defense.",
     "ctaPrimary": "Cases & Projects",
     "ctaCv": "Technical CV",
+    "ctaCvGenerating": "Generating CV...",
     "ctaSecondary": "Contact Me",
     "profileHeader": "// TECHNICAL PROFILE",
     "profileBadge": "AppSec & Cyber Defense",
@@ -34,7 +35,7 @@
       },
       {
         "label": "Academic Roadmap",
-        "value": "B.Sc. in Cyber Defense (2027 intake), PortSwigger Academy, TryHackMe."
+        "value": "B.Sc. in Cyber Defense (2027 intake), continuous specialization in security and web development."
       }
     ],
     "socials": {

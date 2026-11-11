@@ -10,10 +10,20 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet"
   />
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get("theme") === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+      } else {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
   <style>
     :root {
       --bg-page: #ffffff;
-      --bg-canvas: #e2e8f0;
+      --bg-canvas: #d4d4d8;
       --bg-subtle: #f1f5f9;
       --bg-card: #f8fafc;
       --ink-primary: #0f172a;
@@ -22,6 +32,21 @@
       --border-light: #e2e8f0;
       --border-medium: #cbd5e1;
       --accent-dark: #111827;
+      --accent-label: #0f172a;
+    }
+
+    html[data-theme="dark"] {
+      --bg-page: #0f1115;
+      --bg-canvas: #07080b;
+      --bg-subtle: #161a22;
+      --bg-card: rgba(34, 197, 94, 0.06);
+      --ink-primary: #f8fafc;
+      --ink-secondary: #cbd5e1;
+      --ink-muted: #94a3b8;
+      --border-light: #1e2430;
+      --border-medium: #2b3343;
+      --accent-dark: #22c55e;
+      --accent-label: #4ade80;
     }
 
     * {
@@ -37,6 +62,7 @@
       font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
     a {
@@ -48,66 +74,104 @@
       text-decoration: underline;
     }
 
-    /* Barra flotante solo en pantalla para facilitar descarga como PDF */
+    /* Barra flotante superior (solo pantalla) */
     .print-toolbar {
       position: fixed;
-      top: 16px;
-      right: 20px;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 50;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      gap: 10px;
-      background: rgba(15, 23, 42, 0.94);
+      justify-content: center;
+      gap: 8px;
+      width: max-content;
+      max-width: calc(100vw - 24px);
+      background: rgba(15, 17, 21, 0.92);
       color: #f8fafc;
-      padding: 8px 14px;
-      border-radius: 8px;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+      padding: 8px 12px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.45);
       font-size: 12px;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
     }
 
-    .print-toolbar span {
-      color: #cbd5e1;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 11px;
-    }
-
+    .toolbar-link,
     .print-btn {
       appearance: none;
-      border: 1px solid #475569;
-      background: #ffffff;
-      color: #0f172a;
-      font-family: "Inter", sans-serif;
-      font-weight: 600;
-      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 9999px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11.5px;
+      font-weight: 500;
       padding: 6px 12px;
-      border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.15s ease, transform 0.1s ease;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease,
+        transform 0.1s ease;
     }
 
-    .print-btn:hover {
-      background: #e2e8f0;
+    .toolbar-link {
+      color: #cbd5e1;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.12);
     }
 
-    .print-btn:active {
+    .toolbar-link:hover {
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.06);
+      text-decoration: none;
+    }
+
+    .toolbar-btn-theme {
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: #1a1e26;
+      color: #e2e8f0;
+    }
+
+    .toolbar-btn-theme:hover {
+      border-color: #22c55e;
+      color: #4ade80;
+    }
+
+    .print-btn-primary {
+      border: 1px solid #22c55e;
+      background: #22c55e;
+      color: #052e16;
+      font-weight: 700;
+    }
+
+    .print-btn-primary:hover {
+      background: #4ade80;
+      border-color: #4ade80;
+    }
+
+    .print-btn:active,
+    .toolbar-link:active {
       transform: scale(0.98);
     }
 
-    /* Contenedor estricto de hoja A4 */
+    /* Contenedor estricto de hoja A4 centrada */
     .sheet-wrapper {
-      display: flex;
-      justify-content: center;
-      padding: 28px 16px 40px;
+      width: 100%;
+      padding: 74px 16px 40px;
+      overflow-x: auto;
     }
 
     .page {
       width: 210mm;
       height: 297mm;
       max-height: 297mm;
+      margin: 0 auto;
       background-color: var(--bg-page);
       padding: 0 14mm 11mm;
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.16);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -115,6 +179,7 @@
       position: relative;
       page-break-inside: avoid;
       break-inside: avoid;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
     /* CABECERA EDITORIAL DE 3 COLUMNAS */
@@ -204,7 +269,7 @@
     .role-bar {
       width: 2px;
       height: 16px;
-      background-color: var(--ink-primary);
+      background-color: var(--accent-dark);
       flex-shrink: 0;
     }
 
@@ -245,7 +310,7 @@
       width: 4px;
       height: 4px;
       border-radius: 50%;
-      background-color: var(--ink-primary);
+      background-color: var(--accent-dark);
     }
 
     .contact-list {
@@ -269,7 +334,7 @@
       font-family: "JetBrains Mono", monospace;
       font-weight: 700;
       font-size: 7.2pt;
-      color: var(--ink-primary);
+      color: var(--accent-label);
       min-width: 11px;
     }
 
@@ -346,7 +411,7 @@
       font-size: 7.2pt;
       font-weight: 700;
       letter-spacing: 0.04em;
-      color: var(--ink-primary);
+      color: var(--accent-label);
       margin-bottom: 1.6mm;
     }
 
@@ -370,7 +435,7 @@
       position: absolute;
       left: 0;
       top: 0;
-      color: var(--ink-primary);
+      color: var(--accent-dark);
       font-weight: 700;
     }
 
@@ -422,8 +487,8 @@
       width: 5.5px;
       height: 5.5px;
       border-radius: 50%;
-      background-color: var(--ink-primary);
-      border: 1.5px solid #ffffff;
+      background-color: var(--accent-dark);
+      border: 1.5px solid var(--bg-page);
     }
 
     .project-header {
@@ -480,7 +545,7 @@
 
     .security-highlight {
       background-color: var(--bg-card);
-      border-left: 2px solid var(--ink-primary);
+      border-left: 2px solid var(--accent-dark);
       padding: 1.4mm 2.5mm;
       font-size: 7.75pt;
       line-height: 1.36;
@@ -489,6 +554,7 @@
 
     .security-label {
       font-weight: 700;
+      color: var(--accent-label);
     }
 
     /* PIE DE PÁGINA / RESUMEN DE TECNOLOGÍAS (3 COLUMNAS PLANAS) */
@@ -535,7 +601,7 @@
     @media print {
       html,
       body {
-        background: #ffffff !important;
+        background: var(--bg-page) !important;
         width: 210mm;
         height: 296.5mm;
         -webkit-print-color-adjust: exact;
@@ -550,6 +616,7 @@
         padding: 0;
         margin: 0;
         display: block;
+        overflow: visible;
       }
 
       .page {
@@ -565,12 +632,21 @@
   </style>
 </head>
 <body>
-  <div class="print-toolbar no-print">
-    <span>Vista A4 Imprimible</span>
-    <button class="print-btn" type="button" onclick="window.print()">
-      Imprimir / Guardar PDF
+  <nav class="print-toolbar no-print" aria-label="Herramientas del CV">
+    <a href="/" class="toolbar-link">← Volver al Portafolio</a>
+    <button
+      id="theme-toggle-btn"
+      class="print-btn toolbar-btn-theme"
+      type="button"
+      aria-label="Cambiar entre tema claro y oscuro"
+      title="Alternar tema Claro / Oscuro"
+    >
+      🌙 / ☀️
     </button>
-  </div>
+    <button class="print-btn print-btn-primary" type="button" onclick="window.print()">
+      🖨️ Imprimir / Guardar en PDF
+    </button>
+  </nav>
 
   <div class="sheet-wrapper">
     <main class="page">
@@ -899,5 +975,30 @@
       </footer>
     </main>
   </div>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var toggleBtn = document.getElementById("theme-toggle-btn");
+      if (!toggleBtn) return;
+
+      function syncThemeUrl(theme) {
+        var url = new URL(window.location.href);
+        if (theme === "dark") {
+          url.searchParams.set("theme", "dark");
+        } else {
+          url.searchParams.delete("theme");
+        }
+        window.history.replaceState({}, "", url.toString());
+      }
+
+      toggleBtn.addEventListener("click", function () {
+        var current = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
+        var next = current === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        syncThemeUrl(next);
+      });
+    })();
+  </script>
 </body>
 </html>

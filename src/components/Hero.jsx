@@ -179,7 +179,7 @@ export default function Hero() {
                     >
                       <a
                         role="menuitem"
-                        href="/cv-kevin-darnet-dark.pdf"
+                        href="/cv-kevin-darnet.html?theme=dark"
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => setIsCvMenuOpen(false)}
@@ -191,7 +191,7 @@ export default function Hero() {
 
                       <a
                         role="menuitem"
-                        href="/cv-kevin-darnet-light.pdf"
+                        href="/cv-kevin-darnet.html"
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => setIsCvMenuOpen(false)}

@@ -984,11 +984,7 @@
 
       function syncThemeUrl(theme) {
         var url = new URL(window.location.href);
-        if (theme === "dark") {
-          url.searchParams.set("theme", "dark");
-        } else {
-          url.searchParams.delete("theme");
-        }
+        url.searchParams.set("theme", theme);
         window.history.replaceState({}, "", url.toString());
       }
 

@@ -191,7 +191,7 @@ export default function Hero() {
 
                       <a
                         role="menuitem"
-                        href="/cv-kevin-darnet.html"
+                        href="/cv-kevin-darnet.html?theme=light"
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => setIsCvMenuOpen(false)}

@@ -85,15 +85,10 @@ export default function Header() {
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#1e1e1e] border border-[#333333] group-hover:border-[#F5F5F5] transition-colors duration-300">
               <Terminal className="w-4 h-4 text-[#F5F5F5]" />
             </span>
-            <div className="flex flex-col">
-              <span className="font-mono text-sm sm:text-base font-bold tracking-tight text-[#F5F5F5] group-hover:text-white transition-colors duration-300">
-                {t.nav.brand}
-                <span className="text-[#888888] font-normal">_</span>
-              </span>
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#888888] hidden sm:inline">
-                {t.nav.brandFull}
-              </span>
-            </div>
+            <span className="font-mono text-sm sm:text-base font-bold tracking-tight text-[#F5F5F5] group-hover:text-white transition-colors duration-300 whitespace-nowrap">
+              {t.nav.brand}
+              <span className="text-[#888888] font-normal">_</span>
+            </span>
           </a>
 
           {/* Desktop Navigation Links */}
